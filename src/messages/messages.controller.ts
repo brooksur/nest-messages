@@ -1,21 +1,12 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  NotFoundException,
-} from '@nestjs/common'
+import { Controller, Get, Post, Body, Param, NotFoundException, Injectable } from '@nestjs/common'
 import { CreateMessageDto } from './dtos/create-message.dto'
 import { MessagesService } from './messages.service'
 
+// this controller only *consumes* classes
+// therefore is not marked as injectable
 @Controller('messages')
 export class MessagesController {
-  messagesService: MessagesService
-
-  constructor() {
-    this.messagesService = new MessagesService()
-  }
+  constructor(public messagesService: MessagesService) {}
 
   @Get()
   listMessages() {
